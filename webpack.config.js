@@ -6,23 +6,23 @@ module.exports = {
   target: "node",
   entry: "./index.ts", // Replace with your entry TypeScript file
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"), // Output directory
+    filename: "index.js",
+    path: path.resolve(__dirname, "build"), // Output directory
   },
-  mode: "development",
+  mode: "production",
   module: {
     rules: [
       {
         test: /\.ts$/,
         use: "ts-loader",
       },
+      { test: /\.node$/, loader: "node-loader" },
     ],
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".node", ".js"],
   },
   optimization: {
     minimizer: [new TerserPlugin()], // Enable minification
   },
-  externals: [nodeExternals()],
 };
